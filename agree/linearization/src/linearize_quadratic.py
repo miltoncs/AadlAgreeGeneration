@@ -2,8 +2,6 @@
 # d(a, t, v0, d0) = (1/2) * a * (t^2) + v0 * t + d0
 # Using the Tangent Line Approximation process
 
-# Assuming const acceleration, when does the function not intersect y=0?
-
 # We want to know when the curve does not intersect y=0, indicating that the maneuver was successful in avoiding the
 # ground.
 import sys
@@ -21,6 +19,7 @@ def local_optima():
     return distance_via_kinematic(t)
 
 
+# 1/2 * a * (t**2) + v_0 * t + y
 def distance_via_kinematic(time):
     return 0.5 * given_acceleration * (time ** 2) + given_initial_velocity * time + given_initial_altitude
 
@@ -32,7 +31,7 @@ def velocity_via_kinematic(time):
 
 def linearize_quadratic():
 
-    linear_representation = linearize.Linearization(distance_via_kinematic, velocity_via_kinematic, segments=10, start=0, end=12)
+    linear_representation = linearize.Linearization(distance_via_kinematic, velocity_via_kinematic, segments=5, start=0, end=12)
 
     linear_representation.print_linearization_parameters()
     print("Clearance:       ", min([p[1] for p in linear_representation.segment_start_points]))
